@@ -2,6 +2,8 @@
 {
     public static class BDDLocal
     {
+
+        public static dynamic? HistorialConexion  = null;
         private static List<string> Materias = 
             [
             "Programación VI", 

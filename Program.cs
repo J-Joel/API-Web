@@ -1,4 +1,14 @@
+using API_Web.Conexion;
+
 var builder = WebApplication.CreateBuilder(args);
+
+HistorialSQL sqlcon = new HistorialSQL();
+BDDLocal.HistorialConexion = sqlcon;
+if (!sqlcon.TestConnection())
+{
+    Console.WriteLine("Error al acceder a la tabla: ORDERS_HISTORY, se accedera a la bdd local de ORDERS_HISTORY");
+    BDDLocal.HistorialConexion = new HistorialLocal();
+}
 
 // Add services to the container.
 

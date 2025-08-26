@@ -9,14 +9,14 @@ namespace API_Web.Controllers
     {
         // GET: api/<AlumnoController>
         [HttpGet]
-        public IEnumerable<Alumno> Get()
+        public List<Alumno> Get()
         {
             return BDDLocal.listaAlumno; // Se devuelve una lista de la base de datos
         }
 
         // GET api/<AlumnoController>/5
         [HttpGet("{id}")]
-        public ActionResult<Alumno> Get(int id)
+        public ActionResult<Alumno> Get_PorID(int id)
         {
             Alumno alumno = BDDLocal.AlumnoPorID(id);
             if (alumno != null)
