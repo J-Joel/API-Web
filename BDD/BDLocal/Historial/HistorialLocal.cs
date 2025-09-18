@@ -1,7 +1,6 @@
-﻿using API_Web.Models;
-using Microsoft.Data.SqlClient;
+﻿using API_Web.Models.Historial;
 
-namespace API_Web.Conexion
+namespace API_Web.BDD.BDLocal.Historial
 {
     public class HistorialLocal
     {

@@ -1,24 +1,26 @@
-﻿using API_Web.Conexion;
+﻿using API_Web.BDD.BDLocal.Alumnos;
+using API_Web.Models.Alumnos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API_Web.Controllers
+namespace API_Web.Controllers.Alumnos
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "Alumnos")]
     public class AlumnoController : ControllerBase
     {
         // GET: api/<AlumnoController>
         [HttpGet]
         public List<Alumno> Get()
         {
-            return BDDLocal.listaAlumno; // Se devuelve una lista de la base de datos
+            return AlumnoLocal.listaAlumno; // Se devuelve una lista de la base de datos
         }
 
         // GET api/<AlumnoController>/5
         [HttpGet("{id}")]
         public ActionResult<Alumno> Get_PorID(int id)
         {
-            Alumno alumno = BDDLocal.AlumnoPorID(id);
+            Alumno alumno = AlumnoLocal.AlumnoPorID(id);
             if (alumno != null)
             {
                 return alumno; // Se devuelve un objeto de la ID buscado
@@ -32,8 +34,8 @@ namespace API_Web.Controllers
         // Lo malo de esto es que se pierde el seguimiento y control en el caso de que el objeto dependa de otro modelo, pero por lo visto es mejor asi(escalabilidad)...
         public ActionResult<Alumno> Post(Alumno nuevo) 
         {
-            nuevo.Id = BDDLocal.UltimoID() + 1;
-            BDDLocal.listaAlumno.Add(nuevo);
+            nuevo.Id = AlumnoLocal.UltimoID() + 1;
+            AlumnoLocal.listaAlumno.Add(nuevo);
             return CreatedAtAction(nameof(Get), new { id = nuevo.Id }, nuevo);
         }
 
@@ -43,7 +45,7 @@ namespace API_Web.Controllers
         {
             if (id != alumno.Id) return BadRequest(); // Error 400, la solicitud no se pudo procesar por error del Cliente
 
-            Alumno alumnoExistente = BDDLocal.AlumnoPorID(id);
+            Alumno alumnoExistente = AlumnoLocal.AlumnoPorID(id);
             if (alumnoExistente == null) return NotFound(); // Error 404
 
             alumnoExistente.Nombre = alumno.Nombre;
@@ -57,10 +59,10 @@ namespace API_Web.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Alumno> Delete(int id)
         {
-            Alumno alumnoExistente = BDDLocal.AlumnoPorID(id);
+            Alumno alumnoExistente = AlumnoLocal.AlumnoPorID(id);
             if (alumnoExistente == null) return NotFound(); // Error 404
 
-            BDDLocal.listaAlumno.Remove(alumnoExistente);
+            AlumnoLocal.listaAlumno.Remove(alumnoExistente);
             return NoContent(); // Ok 204
         }
     }

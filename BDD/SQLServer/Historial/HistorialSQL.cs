@@ -1,7 +1,7 @@
-﻿using API_Web.Models;
+﻿using API_Web.Models.Historial;
 using Microsoft.Data.SqlClient;
 
-namespace API_Web.Conexion
+namespace API_Web.BDD.SQLServer.Historial
 {
     public class HistorialSQL
     {

@@ -1,4 +1,4 @@
-﻿namespace API_Web.Models
+﻿namespace API_Web.Models.Historial
 {
     public class HistorialOrdenes
     {

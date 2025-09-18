@@ -1,9 +1,10 @@
-﻿namespace API_Web.Conexion
-{
-    public static class BDDLocal
-    {
+﻿using API_Web.Models.Alumnos;
 
-        public static dynamic? HistorialConexion  = null;
+namespace API_Web.BDD.BDLocal.Alumnos
+{
+    public static class AlumnoLocal
+    {
+        // Actividad 1 - 2
         private static List<string> Materias = 
             [
             "Programación VI", 

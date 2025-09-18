@@ -1,11 +1,11 @@
-using API_Web.Models;
+using API_Web.Models.Ejemplo;
 using Microsoft.AspNetCore.Mvc;
-using System.Timers;
 
-namespace API_Web.Controllers
+namespace API_Web.Controllers.Ejemplo
 {
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = "Ejemplo")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;

@@ -1,4 +1,4 @@
-namespace API_Web
+namespace API_Web.Models.Alumnos
 {
     public class Alumno
     {
