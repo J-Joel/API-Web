@@ -1,4 +1,5 @@
-﻿using API_Web.Models.Clubes;
+﻿using API_Web.BDD;
+using API_Web.Models.Clubes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,16 +24,16 @@ namespace API_Web.Controllers.Clubes
         [HttpPost("login")]
         public ActionResult<LoginResponse> Login([FromBody] LoginRequest req)
         {
-            var validUser = _config["DemoUser:Username"];
-            var validPass = _config["DemoUser:Password"];
-
-            if (req.Username != validUser || req.Password != validPass)
-                return Unauthorized(new { message = "Credenciales invalidas" });
+            UsuarioDTO usuario = BDDConexion.usuarioTabla.UsuarioPorUsuNomb(req.Username);
+            if (usuario == null)
+                return Unauthorized(new { message = "aCredenciales invalidas" });
+            if (!BDDConexion.usuarioTabla.ContraseñaHashValidado(usuario.UsuarioId, req.Password))
+                return Unauthorized(new { message = "bCredenciales invalidas" });
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, req.Username),
-                new Claim (ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Name, usuario.UsuarioNombre),
+                new Claim(ClaimTypes.Role, usuario.Rol),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

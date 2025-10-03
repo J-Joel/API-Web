@@ -6,7 +6,7 @@ namespace API_Web.BDD.SQLServer.Clubes
 {
     public class ClubTabla : ClubesConexion // Hereda la conexion para esta clase
     {
-        #region Metodo GET
+        #region Metodos GET
         public List<Club> ListadoDeClub()
         {
             List<Club> list = new List<Club>();
@@ -29,7 +29,6 @@ namespace API_Web.BDD.SQLServer.Clubes
                         NombreEstadio = reader.GetString(6),
                         Activo = reader.GetBoolean(7)
                     });
-                    //Console.WriteLine(reader.GetString(1));
                 }
             }
             return list;
@@ -62,9 +61,6 @@ namespace API_Web.BDD.SQLServer.Clubes
             }
             return list;
         }
-        #endregion
-
-        #region Metodo GET(id)
         public Club ClubPorId(int id)
         {
             Club club = new();
@@ -72,6 +68,37 @@ namespace API_Web.BDD.SQLServer.Clubes
             {
                 string query = $"SELECT * FROM Club WHERE ClubId = {id}";
                 SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    club = new Club()
+                    {
+                        ClubId = reader.GetInt32(0),
+                        Nombre = reader.GetString(1),
+                        CantidadSocios = reader.GetInt32(2),
+                        CantidadTitulos = reader.GetInt32(3),
+                        FechaFundacion = DateOnly.FromDateTime(reader.GetDateTime(4)),
+                        UbicacionEstadio = reader.GetString(5),
+                        NombreEstadio = reader.GetString(6),
+                        Activo = reader.GetBoolean(7)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return club;
+        }
+        public Club ClubPorNombre(string nombre)
+        {
+            Club club = new();
+            using (SqlConnection connection = new SqlConnection(conexionString))
+            {
+                string query = $"SELECT * FROM Club WHERE Nombre = @Nombre";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Nombre", nombre);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
@@ -156,7 +183,7 @@ namespace API_Web.BDD.SQLServer.Clubes
                     "CantidadTitulos = @CantidadTitulos, " +
                     "FechaFundacion = @FechaFundacion, " +
                     "UbicacionEstadio = @UbicacionEstadio, " +
-                    "NombreEstadio = @NombreEstadio " +
+                    "NombreEstadio = @NombreEstadio, " +
                     "Activo = @Activo " +
                 "WHERE ClubId = @ClubId";
             try
@@ -165,7 +192,6 @@ namespace API_Web.BDD.SQLServer.Clubes
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@ClubId", club.ClubId);
                         command.Parameters.AddWithValue("@Nombre", club.Nombre);
                         command.Parameters.AddWithValue("@CantidadSocios", club.CantidadSocios);
                         command.Parameters.AddWithValue("@CantidadTitulos", club.CantidadTitulos);
@@ -173,6 +199,7 @@ namespace API_Web.BDD.SQLServer.Clubes
                         command.Parameters.AddWithValue("@UbicacionEstadio", club.UbicacionEstadio);
                         command.Parameters.AddWithValue("@NombreEstadio", club.NombreEstadio);
                         command.Parameters.AddWithValue("@Activo", club.Activo);
+                        command.Parameters.AddWithValue("@ClubId", club.ClubId);
 
                         connection.Open();
                         int rowsAffected = command.ExecuteNonQuery();
@@ -184,8 +211,9 @@ namespace API_Web.BDD.SQLServer.Clubes
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false; // Problema de conexion
             }
             return true;
@@ -195,7 +223,7 @@ namespace API_Web.BDD.SQLServer.Clubes
         #region Metodos DELETE
         public bool ClubEliminado(int id)
         {
-            string query = "UPDATE FROM Club WHERE ClubId = @ClubId";
+            string query = "DELETE FROM Club WHERE ClubId = @ClubId";
             try
             {
                 using (SqlConnection connection = new SqlConnection(conexionString))
@@ -249,6 +277,5 @@ namespace API_Web.BDD.SQLServer.Clubes
             return true;
         }
         #endregion
-
     } /// Fin de la clase "ClubTabla"
 }

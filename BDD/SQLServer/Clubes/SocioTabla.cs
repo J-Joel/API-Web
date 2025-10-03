@@ -6,7 +6,6 @@ namespace API_Web.BDD.SQLServer.Clubes
 {
     public class SocioTabla : ClubesConexion // Hereda la conexion para esta clase
     {
-
         #region Metodo GET
         public List<Socio>ListadoDeSocio()
         {
@@ -64,9 +63,6 @@ namespace API_Web.BDD.SQLServer.Clubes
             }
             return list;
         }
-        #endregion
-
-        #region Metodo GET(id)
         public Socio SocioPorId(int id)
         {
             Socio socio = new();
@@ -98,9 +94,6 @@ namespace API_Web.BDD.SQLServer.Clubes
             }
             return socio;
         }
-        #endregion
-
-        #region Metodo GET(Dni)
         public Socio SocioPorDni(int dni)
         {
             Socio socio = new();
@@ -283,6 +276,5 @@ namespace API_Web.BDD.SQLServer.Clubes
             return true;
         }
         #endregion
-
     }
 }

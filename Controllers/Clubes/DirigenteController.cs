@@ -3,8 +3,6 @@ using API_Web.Models.Clubes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace API_Web.Controllers.Clubes
 {
     [Route("api/[controller]")]
@@ -12,6 +10,7 @@ namespace API_Web.Controllers.Clubes
     [ApiExplorerSettings(GroupName = "Clubes")]
     public class DirigenteController : ControllerBase
     {
+        #region Controladores GET
         // GET: api/<DirigenteController>
         [HttpGet]
         public ActionResult<Dirigente> Get()
@@ -37,7 +36,9 @@ namespace API_Web.Controllers.Clubes
 
             return Ok(dirigente);
         }
+        #endregion
 
+        #region Controladores POST
         // POST api/<DirigenteController>
         [HttpPost]
         [Authorize]
@@ -57,7 +58,9 @@ namespace API_Web.Controllers.Clubes
 
             return Created();
         }
+        #endregion
 
+        #region Controladores PUT
         // PUT api/<DirigenteController>/5
         //[HttpPut("{id}")]
         [HttpPut]
@@ -81,7 +84,9 @@ namespace API_Web.Controllers.Clubes
 
             return NoContent();
         }
+        #endregion
 
+        #region Controladores DELETE
         // DELETE api/<DirigenteController>/5
         [HttpDelete("{id}")]
         [Authorize]
@@ -107,10 +112,11 @@ namespace API_Web.Controllers.Clubes
                     return BadRequest(new { status = 400, message = "El registro ya se encuentra deshabilitado" });
             }
 
-            if (!BDDConexion.clubTabla.ClubDeshabilitado(id))
+            if (!BDDConexion.dirigenteTabla.DirigenteDeshabilitado(id))
                 return StatusCode(500, new { status = 500, message = "Error al Deshabilitado el registro" });
 
             return NoContent();
         }
+        #endregion
     }
 }

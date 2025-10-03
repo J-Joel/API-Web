@@ -61,11 +61,12 @@ GO
 CREATE INDEX IX_Socio_ClubId ON Socio (ClubId);
 GO
 
--- Tabla Club
+-- Tabla Usuario
 CREATE TABLE Usuario (
     UsuarioId           INT IDENTITY(1,1) PRIMARY KEY,
     UsuarioNombre       NVARCHAR(100) NOT NULL,
-    ContraseñaHash      NVARCHAR(100) NOT NULL,
+    ContraseñaHash      VARBINARY(64) NOT NULL,
+    Salt                VARBINARY(16) NOT NULL,
     Rol				    NVARCHAR(25) NOT NULL DEFAULT ('Usuario'),
 	Activo				BIT NOT NULL DEFAULT (1),
 );
@@ -87,3 +88,8 @@ VALUES
 INSERT INTO Socio (ClubId, Nombre, Apellido, FechaNacimiento, FechaAsociado, Dni, CantidadAsistencias, Activo)
 VALUES
 (1, 'Juan', 'González', '2000-11-20', '2021-03-10', 40999888, 12, 1);
+
+-- Contraseña: !Admin123 (Para el algoritmo utilizado, chequear BDLocal -> Clubes -> UsuarioLocal.cs["Ayuda Precarga"])
+INSERT INTO Usuario (UsuarioNombre, ContraseñaHash, Salt, Rol, Activo) 
+VALUES 
+('admin', 0xF6FD180C54971DA3B963BAB78C40D3707109C5A7, 0x9AD6430BD033E8B0785D250C68EE184F, 'Admin', 1)

@@ -10,6 +10,7 @@
         public string? UbicacionEstadio { get; set; }
         public string? NombreEstadio { get; set; }
         public bool Activo { get; set; }
+
         private bool _isDisposed = false;
         public void Dispose()
         {

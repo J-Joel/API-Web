@@ -61,9 +61,6 @@ namespace API_Web.BDD.SQLServer.Clubes
             }
             return list;
         }
-        #endregion
-
-        #region Metodo GET(id)
         public Dirigente DirigentePorId(int id)
         {
             Dirigente dirigente = new();
@@ -94,9 +91,6 @@ namespace API_Web.BDD.SQLServer.Clubes
             }
             return dirigente;
         }
-        #endregion
-
-        #region Metodo GET(Dni)
         public Dirigente DirigentePorDni(int dni)
         {
             Dirigente dirigente = new();
@@ -280,6 +274,5 @@ namespace API_Web.BDD.SQLServer.Clubes
             return true;
         }
         #endregion
-
     }
 }
