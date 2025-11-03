@@ -4,7 +4,7 @@ namespace API_Web.BDD.SQLServer.Clubes
 {
     public class ClubesConexion : IDisposable // Clase padre necesaria para la usabilidad de la clase en un bloque using
     {
-        protected string conexionString = $"Data Source=DESKTOP-CA64Q9R;DataBase=a;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=True;Persist Security Info=True;TrustServerCertificate=True;";
+        protected string conexionString = $"Data Source=DESKTOP-CA64Q9R;DataBase=ClubesDB;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=True;Persist Security Info=True;TrustServerCertificate=True;";
         private bool _isDisposed = false;
         public bool PruebaConexion()
         {

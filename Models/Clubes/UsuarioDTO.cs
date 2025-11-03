@@ -2,6 +2,7 @@
 {
     public class UsuarioDTO : IDisposable
     {
+        // Se utiliza este modelo para las resupuestas o ingreso de datos de parte del usuario
         public int UsuarioId { get; set; }
         public string? UsuarioNombre { get; set; }
         public string? Contraseña { get; set; }

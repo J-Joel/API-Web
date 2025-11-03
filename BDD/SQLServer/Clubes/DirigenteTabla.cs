@@ -181,7 +181,7 @@ namespace API_Web.BDD.SQLServer.Clubes
                     "Apellido = @Apellido, " +
                     "FechaNacimiento = @FechaNacimiento, " +
                     "Rol = @Rol, " +
-                    "Dni = @Dni " +
+                    "Dni = @Dni, " +
                     "Activo = @Activo " +
                 "WHERE DirigenteId = @DirigenteId";
             try
@@ -209,8 +209,9 @@ namespace API_Web.BDD.SQLServer.Clubes
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false; // Problema de conexion
             }
             return true;

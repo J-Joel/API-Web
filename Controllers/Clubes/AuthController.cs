@@ -6,8 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace API_Web.Controllers.Clubes
 {
     [Route("api/[controller]")]
@@ -50,7 +48,12 @@ namespace API_Web.Controllers.Clubes
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
 
-            return Ok(new LoginResponse { Token = jwt, ExpiresAtUtc = token.ValidTo });
+            return Ok(new LoginResponse { 
+                UsuarioId = usuario.UsuarioId, 
+                Rol = usuario.Rol, 
+                Token = jwt, 
+                ExpiresAtUtc = token.ValidTo 
+            });
         }
     }
 }

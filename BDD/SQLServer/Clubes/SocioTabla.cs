@@ -1,4 +1,4 @@
-﻿using API_Web.Models.Clubes;
+﻿    using API_Web.Models.Clubes;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -182,8 +182,8 @@ namespace API_Web.BDD.SQLServer.Clubes
                     "FechaNacimiento = @FechaNacimiento, " +
                     "FechaAsociado = @FechaAsociado, " +
                     "Dni = @Dni, " +
-                    "CantidadAsistencias = @CantidadAsistencias " +
-                    "Activo = @Activo" +
+                    "CantidadAsistencias = @CantidadAsistencias, " +
+                    "Activo = @Activo " +
                 "WHERE SocioId = @SocioId";
             try
             {
@@ -200,7 +200,6 @@ namespace API_Web.BDD.SQLServer.Clubes
                         command.Parameters.AddWithValue("@Dni", socio.Dni);
                         command.Parameters.AddWithValue("@CantidadAsistencias", socio.CantidadAsistencias);
                         command.Parameters.AddWithValue("@Activo", socio.Activo);
-
                         connection.Open();
                         int rowsAffected = command.ExecuteNonQuery();
 
@@ -211,8 +210,9 @@ namespace API_Web.BDD.SQLServer.Clubes
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false; // Problema de conexion
             }
             return true;

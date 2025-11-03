@@ -71,7 +71,7 @@ namespace API_Web.Controllers.Clubes
         //[HttpPut("{id}")]
         [HttpPut]
         [Authorize]
-        public ActionResult Put([FromBody] Socio socio)
+        public ActionResult Put(Socio socio)
         {
             if (BDDConexion.socioTabla.SocioPorId(socio.SocioId) == null)
                 return NotFound(new { status = 404, message = "El ID no es valido" });

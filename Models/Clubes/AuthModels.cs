@@ -8,6 +8,8 @@
 
     public class LoginResponse
     {
+        public int UsuarioId { get; set; }
+        public string? Rol { get; set; }
         public string? Token { get; set; }
         public DateTime ExpiresAtUtc { get; set; }
     }

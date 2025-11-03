@@ -18,7 +18,7 @@ namespace API_Web.Controllers.Clubes
             return Ok(BDDConexion.usuarioTabla.ListadoDeUsuario());
         }
         // GET api/<UsuarioController>/5
-        [HttpGet("Id/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<UsuarioDTO> GetPorId(int id)
         {
             UsuarioDTO usuario = BDDConexion.usuarioTabla.UsuarioPorId(id);

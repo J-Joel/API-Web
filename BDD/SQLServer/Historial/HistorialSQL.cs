@@ -5,7 +5,7 @@ namespace API_Web.BDD.SQLServer.Historial
 {
     public class HistorialSQL
     {
-        private string conexionString = $"Data Source=DESKTOP-CA64Q9R;DataBase=aaaa;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=True;Persist Security Info=True;TrustServerCertificate=True;";
+        private string conexionString = $"Data Source=DESKTOP-CA64Q9R;DataBase=MaxTheMuleBroker;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=True;Persist Security Info=True;TrustServerCertificate=True;";
         public bool TestConnection()
         {
             try
